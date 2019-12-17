@@ -1,0 +1,22 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+<div class="container mt-5">
+    <section class="row header">
+        <!---Header Section starts-->
+        <div class="col-md-12">
+            <h3>{{ pimcore_input("pageHeading") }}</h3>
+            <hr />
+        </div>
+    </section>
+    <!---Header Section ends-->
+    <!---Body Section starts-->
+    <section class="row mb-5">
+        <div class="border border-dark col-md-12 mb-5">
+           <p> {{ pimcore_wysiwyg("description", {"height":500}) }}</p>
+
+        </div>
+    </section>
+    <!---Body Section ends-->
+    <!---Footer Section starts-->
+</div>
+{% endblock %}

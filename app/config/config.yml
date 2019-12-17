@@ -1,0 +1,169 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: 'local/' }
+
+pimcore:
+
+
+    workflows:
+        blog_lifecycle:
+            label: 'Blog blogLifecycle'
+            type: 'workflow'
+            supports:
+            - 'Pimcore\Model\DataObject\blog'
+            places:
+                new:
+                    label: 'New Blog'
+                    color: '#377ea9'
+                    permissions:
+                        - objectLayout: 8
+                reviewed:
+                    label: 'To be reviewed Blog'
+                    color: '#28a013'
+                    permissions:
+                        - objectLayout: 9
+                published:
+                    label: 'To be published blog'
+                    title: 'Publish the Blog'
+                    color: '#d9ef36'
+                    permissions:
+                        - objectLayout: 10
+                rejected:
+                    label: 'To be rejected blog'
+                    title: 'Reject the Blog'
+                    color: '#d9ef36'
+                    permissions:
+                        - objectLayout: 10
+            transitions:
+                to_review:
+                    from: new
+                    to:   reviewed
+                    #guard: "is_fully_authenticated() and has_role('ROLE_PIMCORE_WRITER')"
+                publish:
+                    from: reviewed
+                    to:   published
+                    guard: "is_fully_authenticated() and has_role('ROLE_REVIEWER')"
+                reject:
+                    from: reviewed
+                    to:   rejected
+                    guard: "is_fully_authenticated() and has_role('ROLE_REVIEWER')"
+        comment_lifecycle:
+            label: 'commentLifecycle'
+            type: 'workflow'
+            supports:
+            - 'Pimcore\Model\DataObject\Comment'
+            places:
+                new:
+                    label: 'New Comment'
+                    color: '#377ea9'
+                    permissions:
+                        - objectLayout: 7
+                reviewed:
+                    label: 'To be reviewed Comment'
+                    color: '#28a013'
+                    permissions:
+                        - objectLayout: 8
+                published:
+                    label: 'To be published Comment'
+                    title: 'Publish the Comment'
+                    color: '#d9ef36'
+                    permissions:
+                        - objectLayout: 9
+                rejected:
+                    label: 'To be rejected Comment'
+                    title: 'Reject the Comment'
+                    color: '#d9ef36'
+                    permissions:
+                        - objectLayout: 10
+            transitions:
+                to_review:
+                    from: new
+                    to:   reviewed
+                    #guard: "is_fully_authenticated() and has_role('ROLE_PIMCORE_WRITER')"
+                publish:
+                    from: reviewed
+                    to:   published
+                    guard: "is_fully_authenticated() and has_role('ROLE_REVIEWER')"
+                reject:
+                    from: reviewed
+                    to:   rejected
+                    guard: "is_fully_authenticated() and has_role('ROLE_REVIEWER')"
+               
+
+
+                #TODO
+# IMPORTANT Notice!
+# Following there are only some examples listed, for a full list of possible options, please run the following command:
+# ./bin/console debug:config pimcore
+# you can also filter them by path, eg.
+# ./bin/console debug:config pimcore assets
+# or even more specific:
+# ./bin/console debug:config pimcore assets.image
+
+
+#### TRANSLATIONS
+#    translations:
+#        case_insensitive: true
+
+#### REDIS CACHE
+#    cache:
+#        pools:
+#            redis:
+#                enabled: true
+#                connection:
+#                    server: localhost
+#                    database: 14
+
+#### FEATURE FLAGS
+#    flags:
+#        zend_date: true
+
+#### CLASS OVERRIDES EXAMPLES
+#    models:
+#        class_overrides:
+#            'Pimcore\Model\DataObject\News': 'AppBundle\Model\DataObject\News'
+#            'Pimcore\Model\DataObject\News\Listing': 'AppBundle\Model\DataObject\News\Listing'
+#            'Pimcore\Model\DataObject\Folder': 'AppBundle\Model\DataObject\Folder'
+#            'Pimcore\Model\Asset\Folder': 'AppBundle\Model\Asset\Folder'
+#            'Pimcore\Model\Asset\Image': 'AppBundle\Model\Asset\Image'
+#            'Pimcore\Model\Document\Page': 'AppBundle\Model\Document\Page'
+#            'Pimcore\Model\Document\Link': 'AppBundle\Model\Document\Link'
+#            'Pimcore\Model\Document\Listing': 'AppBundle\Model\Document\Listing'
+
+
+#### CUSTOM DOCUMENT EDITABLES
+#    documents:
+#        tags:
+#            map:
+#                markdown: \AppBundle\Model\Document\Tag\Markdown
+
+
+#### CUSTOM OBJECT DATA TYPES
+#    objects:
+#        class_definitions:
+#            data:
+#                map:
+#                  myDataType: \AppBundle\Model\DataObject\Data\MyDataType
+
+
+#### ASSET CUSTOM SETTINGS
+#    assets:
+#        versions:
+#            use_hardlinks: false
+#        image:
+#            low_quality_image_preview:
+#                enabled: false
+#                generator: imagick
+#            thumbnails:
+#                webp_auto_support: false
+
+
+#### SYMFONY OVERRIDES
+framework:
+    assets:
+#### USE SESSION HANDLER CONFIGURED IN php.ini
+#    session:
+#        handler_id: null
+

@@ -1,0 +1,79 @@
+{
+  "name": "pimcore/skeleton",
+  "type": "project",
+  "license": "GPL-3.0-or-later",
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "require": {
+    "php": ">=7.2",
+    "box/spout": "^2.7",
+    "drewm/mailchimp-api": "*",
+    "guzzlehttp/guzzle": ">=4.1.4 <7.0",
+    "mtdowling/cron-expression": "^1.1.0",
+    "pear/archive_tar": "^1.4.3",
+    "pimcore/customer-management-framework-bundle": "^2.4",
+    "pimcore/number-sequence-generator": "^1.0.1",
+    "pimcore/object-merger": "~2.0",
+    "pimcore/pimcore": ">=5.8 <6.4",
+    "pimcore/search-query-parser": "^1.2.4",
+    "wikimedia/composer-merge-plugin": "^1.4"
+  },
+  "require-dev": {
+    "cache/integration-tests": "^0.16.0",
+    "codeception/codeception": " ^2.2"
+  },
+   "suggest": {
+        "hwi/oauth-bundle": "~0.6.2",
+        "php-http/httplug-bundle": "~1.10.0",
+        "php-http/guzzle6-adapter": "^1.1"
+    },
+  "autoload": {
+    "psr-4": {
+      "": ["src/"],
+      "Pimcore\\Model\\DataObject\\": "var/classes/DataObject",
+      "Pimcore\\Model\\Object\\": "var/classes/Object",
+      "Website\\": "legacy/website/lib"
+    },
+    "classmap": [
+      "app/AppKernel.php"
+    ]
+  },
+  "scripts": {
+    "post-create-project-cmd": "Pimcore\\Composer::postCreateProject",
+    "post-install-cmd": [
+      "Pimcore\\Composer::postInstall",
+      "@pimcore-scripts"
+    ],
+    "post-update-cmd": [
+      "Pimcore\\Composer::postUpdate",
+      "@pimcore-scripts",
+      "Pimcore\\Composer::executeMigrationsUp",
+      "@pimcore-scripts"
+    ],
+    "pimcore-scripts": [
+      "Pimcore\\Composer::clearCache",
+      "Pimcore\\Composer::installAssets"
+    ]
+  },
+  "extra": {
+    "symfony-app-dir": "app",
+    "symfony-bin-dir": "bin",
+    "symfony-var-dir": "var",
+    "symfony-web-dir": "web",
+    "symfony-tests-dir": "tests",
+    "symfony-assets-install": "relative",
+    "merge-plugin": {
+      "include": [
+        "composer.local.json"
+      ],
+      "recurse": true,
+      "replace": true,
+      "merge-dev": true,
+      "merge-extra": false,
+      "merge-extra-deep": false,
+      "merge-scripts": false
+    }
+  }
+}

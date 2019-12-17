@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/style.css"-->
+    {% spaceless -%}
+    {% do pimcore_head_link().appendStylesheet(asset('/static/css/bootstrap.css')) %}
+    {% do pimcore_head_link().appendStylesheet(asset('/static/css/animate.css')) %}
+    {% do pimcore_head_link().appendStylesheet(asset('/static/css/style.css'))%}
+
+    {% if not document is defined or not document %}
+        {% set document = pimcore_document(1) %}
+    {% endif %}
+    {% if document.getTitle() is not empty %}
+        {% do pimcore_head_title().set(document.getTitle()) %}
+    {% endif %}
+    {% if document.getDescription() is not empty %}
+        {% do pimcore_head_meta().setDescription(document.getDescription()) %}
+    {% endif %}
+    {% do pimcore_head_title().append('Pep Boys') %}
+    {% do pimcore_head_title().setSeparator(' : ') %}
+    {% set isPortal = ((isPortal is defined) and isPortal) %}
+{%- endspaceless %}
+{% block layout_head_meta deferred %}
+{{ pimcore_head_title() }}
+{{ pimcore_head_meta() }}
+{% endblock %}
+{% block head_stylesheets deferred %}
+{{ pimcore_head_link() }}
+{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-light navbar-danger">
+        <a class="navbar-brand mx-auto d-block" href="#">
+            <img src="/admin/settings/display-custom-logo" height="70" alt="">
+        </a>
+    </nav>
+    {% block content %}{% endblock %}
+
+</body>
+
+</html>

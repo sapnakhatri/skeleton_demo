@@ -1,0 +1,58 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+<div class="container-fluid text-center mt-1">
+    <section class="row header">
+        <!---Header Section starts-->
+        <div class="col-md-12">
+
+            <h1 class="text-danger display-4">{{ pimcore_input("welcomeMessage") }}</h1>
+            <h2>{{ pimcore_input("subHeading") }}</h2>
+            <hr />
+            <h4>Blog CREATE</h4>
+        </div>
+    </section>
+    <!---Header Section ends-->
+    <!---Body Section starts-->
+    <section class="row justify-content-center mb-1">
+        <div class="border border-dark col-md-10 mb-5">
+            {{ pimcore_wysiwyg("description", {"height": 20,"customConfig" : "/static/js/ckeditor_config.js"}) }}
+
+        </div>
+    </section>
+    <!---Body Section ends-->
+    <div  class="clearfix col-md-12" id="message"></div>
+    <!---Footer Section starts-->
+    <section class="footer row justify-content-center">
+        <div class="col-md-8">
+            <p>{{ pimcore_wysiwyg("footerHearding", {"height":20}) }}</p>
+            <h3>{{ pimcore_input("offer") }}</h3>
+            <form method="POST" action="#" name="subscription"  >
+                <div class="row justify-content-center">
+                    <div class="form-group  col-md-6">
+                        {{ form_widget(form.cellphone, { 'attr': {'placeholder': 'Enter you cellphone number','class': 'form-control form-conrol-md'}})
+                        }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="form-check  col-md-6">
+                        {{ form_widget(form.optin, { 'attr':{'class': 'from-control form-control-md'}})
+                        }}{{ form_label(form.optin,'Opt-In',{'label_attr':{'class':'form-check-label'}}) }}
+                    </div>
+                </div>
+                <p><small>{{ pimcore_wysiwyg("termsCondition", {"height":200,"customConfig" : "/static/js/ckeditor_config.js"}) }}</small></p>
+                <p><small>{{ pimcore_link('privacyPolicyLink') }} and {{ pimcore_link('termsConditionLink') }}</small>
+                </p>
+                <p><small>{{ pimcore_wysiwyg('subNote', {"height":20}) }}</small></p>
+                {{ form_row(form.enter, {'attr': {'class': 'btn btn-outline-light mb-3'}}) }}
+
+            </form>
+        </div>
+    </section>
+    <!---Footer Section ends-->
+</div>
+<script src="/static/js/jquery-3.4.1.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/splashpage.js"></script>
+{% endblock %}

@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto Regular'), 
+         local('Roboto-Regular'), 
+         url('fonts/Roboto-Regular.ttf') 
+         format('truetype');
+  }
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Roboto Bold'), 
+         local('Roboto-Bold'), 
+         url('fonts/Roboto-Bold.ttf') 
+         format('truetype');
+  }
+  @font-face {
+    font-family: 'Roboto';
+    font-style: black;
+    font-weight: 900;
+    src: local('Roboto-Black'), 
+         local('Roboto-Black'), 
+         url('fonts/Roboto-Black.ttf') 
+         format('truetype');
+  }
+
+
+
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Black.ttf');
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Bold.ttf');
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Regular.ttf');
+}
+body{font-family:  'Roboto', sans-serif;}
+h2 {font-weight: 600;}
+h4 {font-weight: 700;}
+.text-danger {color: #E51C36 !important; font-weight: 900;}
+.footer,.navbar-danger {background-color: #E51C36;}
+.footer p,.footer label,.footer b {color: #ffffff;}
+.footer h3 {color: #ffffff;font-weight: 900;}
+.footer .bolder{font-weight: 700;}
+.footer div.error {font-size: 12px;font-weight: bold;color: #ffffff;}
+.footer a,.footer a:hover,.footer a:active {font-size: 12px;font-weight: bold;color: #ffffff;    text-decoration: underline;}
+#message{z-index:1000;position: absolute;}
+.customshadow{box-shadow: 0 1rem 3rem rgba(0,0,0,0.50)!important;}
